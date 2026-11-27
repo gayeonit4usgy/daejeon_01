@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{PRODUCT_TITLE}} — 광고 제작 브리프</title>
+<style>
+  :root {
+    --bg: #0e0e10;
+    --panel: #17171a;
+    --panel-2: #1d1d21;
+    --border: #2a2a30;
+    --text: #e8e8ea;
+    --text-dim: #9a9aa2;
+    --accent: #5eead4;
+    --ok: #4ade80;
+    --guess: #d4a259;
+    --unknown: #f87171;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.6;
+    padding: 32px 24px 120px;
+    word-break: keep-all;
+  }
+  .container { max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 27px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 14px; }
+  .subtitle a { color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+
+  .trust {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 12px 16px; margin-bottom: 18px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    font-size: 12.5px; color: var(--text-dim); align-items: center;
+  }
+  .trust .count { font-weight: 700; }
+  .trust .count.ok { color: var(--ok); }
+  .trust .count.guess { color: var(--guess); }
+  .trust .count.unknown { color: var(--unknown); }
+  .trust .src { flex-basis: 100%; color: var(--text-dim); }
+
+  .howto {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 18px; font-size: 13px; color: var(--text-dim); margin-bottom: 28px;
+  }
+  .howto b { color: var(--accent); font-weight: 600; }
+
+  section.sec {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 22px; margin-bottom: 16px;
+  }
+  section.sec h2 {
+    font-size: 16px; font-weight: 700; color: var(--accent);
+    margin: 0 0 4px; letter-spacing: -0.01em;
+  }
+  section.sec .note { font-size: 12px; color: var(--text-dim); margin: 0 0 16px; }
+
+  .row { display: flex; gap: 14px; padding: 9px 0; border-top: 1px solid var(--border); }
+  .row:first-of-type { border-top: none; }
+  .label { flex: 0 0 116px; font-size: 13px; color: var(--text-dim); padding-top: 2px; }
+  .val { flex: 1; font-size: 14.5px; min-width: 0; }
+
+  .badge {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 1px 7px; border-radius: 999px; margin-right: 7px;
+    vertical-align: 1.5px; white-space: nowrap;
+  }
+  .badge.ok { color: var(--ok); border: 1px solid var(--ok); }
+  .badge.guess { color: var(--guess); border: 1px solid var(--guess); }
+  .badge.unknown { color: var(--unknown); border: 1px solid var(--unknown); }
+
+  .ed {
+    display: inline-block; min-width: 90px;
+    border-bottom: 1px dashed transparent; border-radius: 2px;
+    padding: 0 2px; outline: none; transition: background .12s;
+  }
+  .ed:hover { border-bottom-color: var(--border); }
+  .ed:focus { background: var(--panel-2); border-bottom-color: var(--accent); }
+  .ed[data-state="guess"] { border-bottom: 1px dashed rgba(212,162,89,.5); }
+  .ed[data-state="unknown"] { border-bottom: 1px dashed rgba(248,113,113,.6); color: var(--text-dim); font-style: italic; }
+  .ed.edited { border-bottom: 1px solid var(--accent); font-style: normal; color: var(--text); }
+
+  .block {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 13px 15px; margin-top: 11px; font-size: 14px;
+  }
+  .block .bt { font-size: 12px; color: var(--text-dim); margin-bottom: 5px; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 11px; font-size: 13.5px; }
+  th, td { text-align: left; padding: 9px 11px; border: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--panel-2); color: var(--text-dim); font-weight: 600; font-size: 12px; white-space: nowrap; }
+
+  .headline {
+    background: linear-gradient(180deg, rgba(94,234,212,.08), rgba(94,234,212,.02));
+    border: 1px solid rgba(94,234,212,.35); border-radius: 8px;
+    padding: 16px 18px; margin-top: 12px;
+  }
+  .headline .ht { font-size: 11.5px; color: var(--accent); letter-spacing: .04em; margin-bottom: 6px; }
+  .headline .hv { font-size: 18px; font-weight: 600; line-height: 1.45; }
+  .headline .hy { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+
+  .legal { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+  @media (min-width: 760px) { .legal { grid-template-columns: repeat(3, 1fr); } }
+  .legal .col { border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; background: var(--panel-2); }
+  .legal .col h3 { font-size: 12.5px; margin: 0 0 8px; font-weight: 700; }
+  .legal .col.can h3 { color: var(--ok); }
+  .legal .col.cond h3 { color: var(--guess); }
+  .legal .col.cant h3 { color: var(--unknown); }
+  .legal .col ul { margin: 0; padding-left: 17px; font-size: 13px; }
+  .legal .col li { margin-bottom: 5px; }
+  .legal .col li:last-child { margin-bottom: 0; }
+  .disclaimer { font-size: 11.5px; color: var(--text-dim); margin-top: 12px; line-height: 1.5; }
+
+  ul.plain { margin: 10px 0 0; padding-left: 18px; font-size: 14px; }
+  ul.plain li { margin-bottom: 6px; }
+
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: rgba(14,14,16,.94); border-top: 1px solid var(--border);
+    backdrop-filter: blur(8px); padding: 12px 24px;
+  }
+  .bar .inner {
+    max-width: 980px; margin: 0 auto;
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .bar .hint { flex: 1; font-size: 12px; color: var(--text-dim); min-width: 180px; }
+  button.act {
+    background: transparent; color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 6px; padding: 9px 16px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  button.act:hover { background: rgba(94,234,212,.1); }
+  button.act.copied { color: var(--ok); border-color: var(--ok); }
+  button.ghost {
+    background: transparent; color: var(--text-dim); border: 1px solid var(--border);
+    border-radius: 6px; padding: 9px 13px; font-size: 12.5px; cursor: pointer; font-family: inherit;
+  }
+  button.ghost:hover { color: var(--text); border-color: var(--text-dim); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>{{PRODUCT_TITLE}}</h1>
+  <div class="subtitle">광고 제작 브리프 · {{DATE}} · <a href="{{SOURCE_URL}}" target="_blank" rel="noopener">{{SOURCE_LABEL}}</a></div>
+
+  <div class="trust">
+    <span><span class="count ok">{{N_OK}}</span> 확인</span>
+    <span>·</span>
+    <span><span class="count guess">{{N_GUESS}}</span> 추정</span>
+    <span>·</span>
+    <span><span class="count unknown">{{N_UNKNOWN}}</span> 미확인</span>
+    <span class="src">{{COLLECTION_SUMMARY}}</span>
+  </div>
+
+  <div class="howto">
+    <b>추정</b>·<b>미확인</b> 항목은 클릭하면 바로 수정됩니다. 수정 내용은 자동 저장되어 새로고침해도 남습니다.
+    다 채우셨으면 하단의 <b>제작용 브리프 복사</b>를 눌러 채팅에 붙여넣으세요. 포스터 6장 / 15·30초 영상 제작 단계로 이어집니다.
+  </div>
+
+  {{SECTIONS}}
+</div>
+
+<div class="bar">
+  <div class="inner">
+    <div class="hint">수정한 내용이 그대로 복사됩니다.</div>
+    <button class="ghost" id="resetBtn">수정 초기화</button>
+    <button class="act" id="copyBtn">제작용 브리프 복사</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'adbrief-{{BRIEF_ID}}-';
+
+  // innerText는 레이아웃에 의존하고 환경에 따라 없을 수 있다. 읽기는 항상 이 헬퍼로.
+  function txt(el) {
+    if (!el) return '';
+    var s = (typeof el.innerText === 'string' ? el.innerText : el.textContent) || '';
+    return s.replace(/\u00a0/g, ' ').replace(/[ \t]+/g, ' ')
+            .replace(/[ ]*\n[ ]*/g, '\n').replace(/\n{2,}/g, '\n').trim();
+  }
+
+  // 배지나 소제목을 뺀 본문만 읽는다. 문자열 치환보다 복제 후 제거가 안전하다.
+  function txtWithout(el, sel) {
+    if (!el) return '';
+    var c = el.cloneNode(true);
+    c.querySelectorAll(sel).forEach(function (n) { n.remove(); });
+    return txt(c);
+  }
+
+  // 편집 내용 복원 및 저장
+  document.querySelectorAll('.ed[data-field]').forEach(function (el) {
+    var k = KEY + el.dataset.field;
+    var original = el.textContent.trim();
+    var saved = localStorage.getItem(k);
+    if (saved !== null && saved.trim() !== original) {
+      el.textContent = saved;
+      el.classList.add('edited');
+    }
+    el.addEventListener('input', function () {
+      localStorage.setItem(k, el.textContent);
+      el.classList.toggle('edited', el.textContent.trim() !== original);
+      recount();
+    });
+  });
+
+  // 미확인 항목이 채워지면 신뢰도 카운트를 다시 센다
+  function recount() {
+    var n = { ok: 0, guess: 0, unknown: 0 };
+    document.querySelectorAll('.row').forEach(function (row) {
+      var b = row.querySelector('.badge');
+      if (!b) return;
+      var ed = row.querySelector('.ed[data-field]');
+      if (ed && ed.classList.contains('edited') && ed.textContent.trim()) { n.ok++; return; }
+      if (b.classList.contains('ok')) n.ok++;
+      else if (b.classList.contains('guess')) n.guess++;
+      else if (b.classList.contains('unknown')) n.unknown++;
+    });
+    var c = document.querySelectorAll('.trust .count');
+    if (c.length === 3) { c[0].textContent = n.ok; c[1].textContent = n.guess; c[2].textContent = n.unknown; }
+  }
+
+  // 화면에 보이는 그대로를 문서 순서대로 직렬화한다.
+  // 생성 시점 문자열이 아니라 DOM을 읽어야 사용자의 수정이 반영된다.
+  function serialize() {
+    var out = ['# 광고 제작 브리프 — ' + txt(document.querySelector('h1'))];
+    out.push('출처: {{SOURCE_URL}}');
+    out.push('수집: ' + txt(document.querySelector('.trust .src')));
+    out.push('');
+
+    document.querySelectorAll('section.sec').forEach(function (sec) {
+      Array.prototype.forEach.call(sec.children, function (el) {
+        var cl = el.classList;
+        if (el.tagName === 'H2') { out.push('## ' + txt(el)); return; }
+        if (cl.contains('note')) { out.push('(' + txt(el) + ')'); return; }
+
+        if (cl.contains('row')) {
+          var badgeEl = el.querySelector('.badge');
+          var ed = el.querySelector('.ed[data-field]');
+          var badge = '';
+          if (badgeEl) {
+            badge = (ed && ed.classList.contains('edited') && ed.textContent.trim())
+              ? '확인(사용자 입력)' : txt(badgeEl);
+          }
+          out.push('- ' + txt(el.querySelector('.label')) + (badge ? ' [' + badge + ']' : '') +
+                   ': ' + txtWithout(el.querySelector('.val'), '.badge'));
+          return;
+        }
+
+        if (cl.contains('headline')) {
+          out.push('');
+          out.push('★ ' + txt(el.querySelector('.hv')));
+          var why = el.querySelector('.hy');
+          if (why) out.push('  근거: ' + txt(why));
+          out.push('');
+          return;
+        }
+
+        if (el.tagName === 'TABLE') {
+          out.push('');
+          el.querySelectorAll('tr').forEach(function (tr) {
+            var cells = [];
+            tr.querySelectorAll('th,td').forEach(function (c) { cells.push(txt(c).replace(/\n/g, ' ')); });
+            out.push('| ' + cells.join(' | ') + ' |');
+          });
+          out.push('');
+          return;
+        }
+
+        if (cl.contains('block')) {
+          out.push('');
+          var bt = el.querySelector('.bt');
+          if (bt) out.push('[' + txt(bt) + ']');
+          out.push(txtWithout(el, '.bt'));
+          return;
+        }
+
+        if (cl.contains('legal')) {
+          el.querySelectorAll('.col').forEach(function (col) {
+            out.push('');
+            out.push('[' + txt(col.querySelector('h3')) + ']');
+            col.querySelectorAll('li').forEach(function (li) { out.push('- ' + txt(li)); });
+          });
+          return;
+        }
+
+        if (el.tagName === 'UL') {
+          out.push('');
+          el.querySelectorAll('li').forEach(function (li) { out.push('- ' + txt(li)); });
+          return;
+        }
+
+        if (cl.contains('disclaimer')) { out.push(''); out.push('※ ' + txt(el)); return; }
+      });
+      out.push('');
+    });
+
+    out.push('---');
+    out.push('위 브리프로 광고 제작을 진행해 주세요. (산출물: 포스터 6장 / 15초·30초 영상 — 광고 방향 섹션의 추천 참고)');
+    return out.join('\n').replace(/\n{3,}/g, '\n\n');
+  }
+
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var btn = this;
+    navigator.clipboard.writeText(serialize()).then(function () {
+      btn.classList.add('copied');
+      btn.textContent = '복사됨 — 채팅에 붙여넣으세요';
+      setTimeout(function () {
+        btn.classList.remove('copied');
+        btn.textContent = '제작용 브리프 복사';
+      }, 2400);
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    if (!confirm('직접 수정한 내용을 모두 지우고 원래 브리프로 되돌릴까요?')) return;
+    Object.keys(localStorage).filter(function (k) { return k.indexOf(KEY) === 0; })
+      .forEach(function (k) { localStorage.removeItem(k); });
+    location.reload();
+  });
+
+  recount();
+})();
+</script>
+</body>
+</html>
