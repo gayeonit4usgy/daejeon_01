@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>경쟁사 광고 소재 리서치 MVP 설계서 — 메디큐브</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf7f8; --card:#fff; --ink:#1d1a1c; --sub:#6b6268; --line:#ece4e8;
+    --pink:#e0457b; --pink-soft:#fde8ef; --amber:#a86400; --amber-soft:#fff3dc;
+    --green:#1f7a4d; --green-soft:#e3f4ea; --gray-soft:#f2eef0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#141113; --card:#1e1a1d; --ink:#f3eef1; --sub:#a99ea5; --line:#2e282c;
+      --pink:#ff6b9a; --pink-soft:#3a1d28; --amber:#f0b04a; --amber-soft:#33270f;
+      --green:#5cc98f; --green-soft:#15291e; --gray-soft:#262124; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;line-height:1.6;font-size:15px}
+  .wrap{max-width:1120px;margin:0 auto;padding:32px 20px 64px}
+  header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+  .eyebrow{font-size:13px;font-weight:700;color:var(--pink);letter-spacing:.04em}
+  h1{font-size:30px;font-weight:900;margin:4px 0 6px;line-height:1.25}
+  .meta{color:var(--sub);font-size:14px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--gray-soft);color:var(--sub);font-weight:500}
+  .chip.pink{background:var(--pink-soft);color:var(--pink)}
+  .grid{display:grid;gap:16px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:1.2fr 1fr}
+  @media (max-width:860px){.g4{grid-template-columns:repeat(2,1fr)}.g3,.g2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .stat .k{font-size:13px;color:var(--sub);font-weight:500}
+  .stat .v{font-size:26px;font-weight:900;margin-top:2px}
+  .stat .d{font-size:13px;color:var(--sub);margin-top:4px}
+  .stat .v .arrow{color:var(--pink)}
+  section{margin-top:28px}
+  h2{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--pink);color:#fff;font-size:13px}
+  .assume{display:inline-block;font-size:11px;font-weight:700;color:var(--amber);background:var(--amber-soft);padding:1px 7px;border-radius:6px;margin-left:4px;vertical-align:1px}
+  .miss{display:inline-block;font-size:11px;font-weight:700;color:var(--sub);background:var(--gray-soft);padding:1px 7px;border-radius:6px;margin-left:4px;vertical-align:1px}
+  dl{margin:0;display:grid;grid-template-columns:110px 1fr;gap:10px 14px}
+  dt{color:var(--sub);font-weight:500;font-size:14px}
+  dd{margin:0}
+  .timebar{display:flex;height:30px;border-radius:8px;overflow:hidden;margin:10px 0 6px}
+  .timebar span{display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--sub)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .comp h3{margin:0 0 4px;font-size:17px;font-weight:900}
+  .comp .tag{font-size:12px;color:var(--sub);margin-bottom:10px}
+  .comp p{margin:0;font-size:14px}
+  .ref{border-left:4px solid var(--pink);background:var(--pink-soft)}
+  .ref p{margin:0;font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;color:var(--sub);font-weight:700;background:var(--gray-soft)}
+  td.no{font-weight:900;color:var(--pink);width:36px}
+  td.name{font-weight:700;white-space:nowrap}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+  .tablewrap table tr:last-child td{border-bottom:0}
+  ul.plain{margin:0;padding-left:18px}
+  ul.plain li{margin:4px 0}
+  .no-list{list-style:none;padding:0;margin:0}
+  .no-list li{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .no-list li:last-child{border-bottom:0}
+  .no-list .x{flex:none;width:22px;height:22px;border-radius:50%;background:var(--gray-soft);color:var(--sub);display:grid;place-items:center;font-weight:900;font-size:12px}
+  .check li{list-style:none;position:relative;padding-left:26px;margin:8px 0}
+  .check{padding:0;margin:0}
+  .check li::before{content:"✓";position:absolute;left:0;top:0;width:18px;height:18px;border-radius:5px;background:var(--green-soft);color:var(--green);font-weight:900;font-size:12px;display:grid;place-items:center}
+  .rules{font-size:13px;color:var(--sub)}
+  footer{margin-top:32px;font-size:12px;color:var(--sub)}
+  .menu{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .mcard{position:relative}
+  .mcard h3{margin:0 0 12px;font-size:17px;font-weight:900}
+  .mcard .row{margin-top:10px}
+  .mcard .lbl{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:2px}
+  .mcard .val{font-size:14px}
+  .cols{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+  .cols span{font-size:12px;padding:3px 8px;border-radius:6px;background:var(--gray-soft)}
+  .mcard.on{border:2px solid var(--pink);box-shadow:0 6px 20px -12px var(--pink)}
+  .mcard.on .badge{position:absolute;top:16px;right:16px;font-size:11px;font-weight:900;color:#fff;background:var(--pink);padding:3px 9px;border-radius:999px}
+  .mcard.on .cols span{background:var(--pink-soft);color:var(--pink)}
+  a{color:var(--pink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="eyebrow">AI 에이전트 조사 MVP · 조사 설계서</div>
+      <h1>경쟁 뷰티 디바이스 광고 소재,<br>매일 45분 → 10분</h1>
+      <div class="meta">메디큐브 (뷰티 디바이스) · 콘텐츠 마케터 · 작성 2026-11-16</div>
+    </div>
+    <div class="chips">
+      <span class="chip pink">조사할 것: 광고 소재</span>
+      <span class="chip">경쟁사 3곳</span>
+      <span class="chip">표 7칸 + 출처</span>
+      <span class="chip"><span class="assume" style="margin:0">가정</span>&nbsp;= 추측한 값</span>
+    </div>
+  </header>
+
+  <div class="grid g4">
+    <div class="card stat"><div class="k">지금 손으로</div><div class="v">하루 45분<span class="assume">가정</span></div><div class="d">매일 아침, 기획 회의 전</div></div>
+    <div class="card stat"><div class="k">목표</div><div class="v"><span class="arrow">↓</span> 10분 이하</div><div class="d">손으로 할 때의 4분의 1</div></div>
+    <div class="card stat"><div class="k">못 찾은 칸</div><div class="v">30% 이하</div><div class="d">경쟁사마다 최근 소재 3개 이상</div></div>
+    <div class="card stat"><div class="k">지어낸 값</div><div class="v">0개</div><div class="d">모든 값에 출처 링크 + 날짜</div></div>
+  </div>
+
+  <section>
+    <h2><span class="n">0</span>매일 하는 조사, 한눈에 보기</h2>
+    <div class="grid menu">
+      <div class="card mcard on"><span class="badge">지금 고른 조사</span>
+        <h3>광고 소재 리서치</h3>
+        <div class="row"><div class="lbl">누가 매일 하나</div><div class="val">콘텐츠·퍼포먼스 마케터</div></div>
+        <div class="row"><div class="lbl">손으로 하면</div><div class="val">경쟁 브랜드 광고를 매일 찾아 캡처하고, 엑셀에 옮겨 적고, 드라이브에 올려요</div></div>
+        <div class="row"><div class="lbl">표에 적을 칸 (예)</div><div class="cols"><span>훅</span><span>약속</span><span>형식(이미지·영상)</span><span>올린 곳</span><span>시작일</span><span>링크</span></div></div>
+      </div>
+      <div class="card mcard">
+        <h3>상세페이지 조사</h3>
+        <div class="row"><div class="lbl">누가 매일 하나</div><div class="val">MD·콘텐츠 마케터·CX</div></div>
+        <div class="row"><div class="lbl">손으로 하면</div><div class="val">경쟁사 상세페이지를 캡처하고 구성과 문구를 정리해요</div></div>
+        <div class="row"><div class="lbl">표에 적을 칸 (예)</div><div class="cols"><span>첫 화면 문구</span><span>근거(수치·인증)</span><span>후기 보여 주는 방식</span><span>구매 유도 장치</span><span>링크</span></div></div>
+      </div>
+      <div class="card mcard">
+        <h3>경쟁사 가격 조사</h3>
+        <div class="row"><div class="lbl">누가 매일 하나</div><div class="val">MD·온라인 영업</div></div>
+        <div class="row"><div class="lbl">손으로 하면</div><div class="val">몰마다 경쟁 제품 값을 찾아 엑셀에 적고, 어제 값과 비교해요</div></div>
+        <div class="row"><div class="lbl">표에 적을 칸 (예)</div><div class="cols"><span>제품명</span><span>용량(g·ml)</span><span>판매처(몰)</span><span>정가</span><span>판매가</span><span>확인 시각</span><span>링크</span></div></div>
+      </div>
+      <div class="card mcard">
+        <h3>증정품·프로모션 조사</h3>
+        <div class="row"><div class="lbl">누가 매일 하나</div><div class="val">MD·온라인 영업·콘텐츠 마케터</div></div>
+        <div class="row"><div class="lbl">손으로 하면</div><div class="val">몰과 공식 계정의 행사 공지를 돌며 기간, 조건, 증정품을 옮겨 적어요</div></div>
+        <div class="row"><div class="lbl">표에 적을 칸 (예)</div><div class="cols"><span>판매처(몰)</span><span>행사 이름</span><span>기간</span><span>조건</span><span>증정품·용량</span><span>링크</span></div></div>
+      </div>
+      <div class="card mcard">
+        <h3>팝업스토어 조사</h3>
+        <div class="row"><div class="lbl">누가 매일 하나</div><div class="val">브랜드·공간 마케터</div></div>
+        <div class="row"><div class="lbl">손으로 하면</div><div class="val">팝업 앱, 인스타, 기사를 뒤져 일정과 장소, 체험 내용을 정리해요</div></div>
+        <div class="row"><div class="lbl">표에 적을 칸 (예)</div><div class="cols"><span>팝업 이름</span><span>기간</span><span>장소</span><span>체험 프로그램</span><span>현장 혜택</span><span>예약 방식</span><span>링크</span></div></div>
+      </div>
+      <div class="card mcard">
+        <h3>교육 프로그램 조사</h3>
+        <div class="row"><div class="lbl">누가 매일 하나</div><div class="val">교육 회사 운영·기획</div></div>
+        <div class="row"><div class="lbl">손으로 하면</div><div class="val">경쟁 교육 과정 페이지를 열어 커리큘럼, 강사, 가격을 옮겨 적어요</div></div>
+        <div class="row"><div class="lbl">표에 적을 칸 (예)</div><div class="cols"><span>과정명</span><span>대상</span><span>커리큘럼</span><span>강사진</span><span>운영 방식</span><span>가격</span><span>링크</span></div></div>
+      </div>
+      <div class="card mcard">
+        <h3>경쟁 서비스 기능 조사</h3>
+        <div class="row"><div class="lbl">누가 매일 하나</div><div class="val">서비스 기획·개발·데이터 분석</div></div>
+        <div class="row"><div class="lbl">손으로 하면</div><div class="val">경쟁사 자사몰과 앱을 직접 눌러 보며 기능을 캡처하고 정리해요</div></div>
+        <div class="row"><div class="lbl">표에 적을 칸 (예)</div><div class="cols"><span>서비스</span><span>기능 이름</span><span>화면 위치</span><span>하는 일</span><span>로그인 필요 여부</span><span>링크</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">1</span>누가, 언제, 왜 매일 하나</h2>
+    <div class="grid g2">
+      <div class="card">
+        <dl>
+          <dt>누가</dt><dd>메디큐브 콘텐츠 마케터 (주니어 1명)<span class="assume">가정</span></dd>
+          <dt>언제</dt><dd>매일 아침 출근 직후, 그날 콘텐츠 기획 회의 전</dd>
+          <dt>왜</dt><dd>경쟁사가 지금 <b>어떤 훅과 메시지</b>로 우리 고객에게 말을 거는지 알아야 겹치지 않는 메시지를 고를 수 있어요. 그래야 <b>"시간이 없다", "부작용이 무섭다"</b>는 걱정에 먼저 답하는 콘텐츠를 만들 수 있어요.</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <div style="font-weight:700">지금 손으로 하는 45분<span class="assume">가정</span></div>
+        <div class="timebar" role="img" aria-label="메타 광고 라이브러리 검색 15분, 릴스·쇼츠 훑기 15분, 캡처·엑셀 정리 15분">
+          <span style="flex:1;background:#e0457b">15분</span>
+          <span style="flex:1;background:#b05f84">15분</span>
+          <span style="flex:1;background:#7a7a86">15분</span>
+        </div>
+        <div class="legend">
+          <span><i style="background:#e0457b"></i>메타 광고 라이브러리 3곳 검색</span>
+          <span><i style="background:#b05f84"></i>인스타 릴스·유튜브 쇼츠 훑기</span>
+          <span><i style="background:#7a7a86"></i>캡처·엑셀 정리</span>
+        </div>
+      </div>
+    </div>
+    <div class="card ref" style="margin-top:16px">
+      <p><b>이번 조사에서 얻고 싶은 한 줄</b> · 결과 끝에 "우리가 비어 있는 메시지"를 적어요. 예: 경쟁사 아무도 '부작용 걱정'을 말하지 않는다면, 메디큐브 콘텐츠가 먼저 그 걱정에 답할 수 있어요.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>경쟁사 3곳과 고른 이유</h2>
+    <div class="grid g3">
+      <div class="card comp">
+        <h3>마미케어</h3>
+        <div class="tag">EMS 브이쎄라 · 펜타프라임</div>
+        <p>캐릭터 콜라보와 증정품을 내세운 소재가 많은 홈케어 디바이스 브랜드예요. 2535 여성을 두고 메디큐브와 직접 경쟁해요.</p>
+      </div>
+      <div class="card comp">
+        <h3>뉴스킨</h3>
+        <div class="tag">에이지락 라인 · 글로벌 브랜드</div>
+        <p>회원·방문 판매 중심이라 공식 광고보다 회원 개인 콘텐츠가 많을 수 있어요<span class="assume">가정</span>. 메디큐브보다 훨씬 큰 회사예요.</p>
+      </div>
+      <div class="card comp">
+        <h3>바나브</h3>
+        <div class="tag">UP6 갈바닉 · UP7 더 멀티 · 버블팝 클렌저</div>
+        <p>"집에서 에스테틱처럼"을 내세워요. 퇴근 후 간단하게 관리하고 싶은 우리 고객과 겹쳐요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>표에 적을 칸 7개와 찾는 곳</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>#</th><th>칸</th><th>적는 방법</th><th>어디서 찾나</th></tr></thead>
+        <tbody>
+          <tr><td class="no">1</td><td class="name">브랜드·채널</td><td>경쟁사 + 채널 (메타 광고 / 인스타 / 유튜브 쇼츠 / 틱톡)</td><td>메타 광고 라이브러리, 브랜드 공식 계정</td></tr>
+          <tr><td class="no">2</td><td class="name">게재 시작일</td><td>YYYY-MM-DD</td><td>광고 라이브러리 '게재 시작', 게시물 날짜</td></tr>
+          <tr><td class="no">3</td><td class="name">형식</td><td>릴스(길이 초) / 이미지 / 캐러셀(장 수)</td><td>광고 라이브러리, 게시물</td></tr>
+          <tr><td class="no">4</td><td class="name">훅</td><td>영상 첫 자막이나 광고 첫 문장 그대로</td><td>광고 미리보기, 게시물<span class="miss">못 찾을 수 있음</span><br><small style="color:var(--sub)">영상 안 자막만 있을 때</small></td></tr>
+          <tr><td class="no">5</td><td class="name">핵심 메시지</td><td>한 줄 + 고객 걱정과 연결 (시간 절약 / 부작용·안전 / 효과 / 가격·혜택)</td><td>광고 문구, 캡션</td></tr>
+          <tr><td class="no">6</td><td class="name">등장 인물</td><td>모델 / 인플루언서 / 일반인 후기(UGC) / 제품만</td><td>소재 화면</td></tr>
+          <tr><td class="no">7</td><td class="name">행동 유도·혜택</td><td>버튼 문구 + 증정품·할인. 증정품 용량은 ml, g까지</td><td>광고 버튼, 캡션, 연결된 상세페이지<span class="miss">못 찾을 수 있음</span><br><small style="color:var(--sub)">로그인해야 보이는 쿠폰가</small></td></tr>
+          <tr><td class="no">+</td><td class="name">출처·조사한 날짜</td><td>소재마다 링크 1개 이상 + 확인 날짜</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rules">표 한 줄 = 광고 소재 1개 · 경쟁사마다 최근 소재 3~5개 · 소재가 없으면 "최근 소재 못 찾음" · 못 찾은 값은 "못 찾음", 추측한 값은 (가정) · CSV는 UTF-8 BOM으로 저장하고 쉼표·따옴표·줄바꿈이 든 값은 큰따옴표로 감싸기 · 광고 성과(노출·클릭·매출)는 공개되지 않아 적지 않기</p>
+  </section>
+
+  <section>
+    <div class="grid g3">
+      <div class="card">
+        <h2><span class="n">4</span>만들지 않을 것</h2>
+        <ul class="no-list">
+          <li><span class="x">✕</span><span>로그인이 필요한 인스타·틱톡 자동 수집. 막히기 쉽고 계정이 위험해질 수 있어요.</span></li>
+          <li><span class="x">✕</span><span>광고 이미지·영상 파일 내려받기. 링크와 문구만 적어요.</span></li>
+          <li><span class="x">✕</span><span>경쟁사 광고 성과·광고비 추정. 근거 없는 숫자는 만들지 않아요.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2><span class="n">5</span>확인할 숫자</h2>
+        <dl>
+          <dt>걸린 시간</dt><dd>조사를 시킨 순간부터 표가 저장될 때까지 (분)<br><small style="color:var(--sub)">손으로 할 때: 약 45분<span class="assume">가정</span></small></dd>
+          <dt>못 찾은 칸</dt><dd>"못 찾음" 칸 수 ÷ 전체 칸 수<br><small style="color:var(--sub)">처음에 한 번 손으로 재서 비교 기준으로</small></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h2><span class="n">6</span>성공 기준</h2>
+        <ul class="check">
+          <li>걸린 시간 10분 이하<span class="assume">가정</span></li>
+          <li>못 찾은 칸 30% 이하</li>
+          <li>경쟁사마다 최근 소재 3개 이상</li>
+          <li>모든 값에 출처 링크 + 날짜 (100%)</li>
+          <li>지어낸 값 0개 (링크를 열면 같은 문구)</li>
+          <li>"우리가 비어 있는 메시지" 한 줄</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>고객: 관리를 하고 싶고 받고 싶지만 시간이 없고 부작용도 무서운 2535 여성, 퇴근 후 쉬면서 간단하게 관리하고 싶은 상황 · 원본: <a href="./mvp.md">mvp.md</a></footer>
+</div>
+</body>
+</html>

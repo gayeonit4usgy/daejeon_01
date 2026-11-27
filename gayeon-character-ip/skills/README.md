@@ -26,3 +26,7 @@ CJ AX 부트캠프에서 직접 만든 Claude 스킬입니다. 폴더마다 `SKI
 1. 원하는 스킬 폴더를 통째로 내려받습니다.
 2. Claude 앱의 스킬 설정에서 폴더(또는 zip)로 업로드하거나, Claude Code에서는 `~/.claude/skills/` 아래에 폴더째 넣습니다.
 3. 각 `SKILL.md`의 description에 적힌 말(예: "mvp 파일 만들어줘", "카피팀")로 호출합니다.
+
+## 실행 예시
+
+- [`mvp-research-design`](./mvp-research-design/SKILL.md)로 만든 메디큐브 경쟁사 광고 소재 리서치 MVP: [`mvp.md`](../mvp/medicube/mvp.md) · [`mvp.html`](../mvp/medicube/mvp.html)
