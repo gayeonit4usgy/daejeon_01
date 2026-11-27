@@ -29,4 +29,4 @@ CJ AX 부트캠프에서 직접 만든 Claude 스킬입니다. 폴더마다 `SKI
 
 ## 실행 예시
 
-- [`mvp-research-design`](./mvp-research-design/SKILL.md)로 만든 메디큐브 경쟁사 광고 소재 리서치 MVP: [`mvp.md`](../mvp/medicube/mvp.md) · [`mvp.html`](../mvp/medicube/mvp.html)
+- [`mvp-research-design`](./mvp-research-design/SKILL.md)로 만든 메디큐브 경쟁사 광고 소재 리서치 MVP: [폴더 보기](../mvp/medicube/) (설계서 `mvp.md`·`mvp.html`, 제안서, 아침회의 파일럿 결과)

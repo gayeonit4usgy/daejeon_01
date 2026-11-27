@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>경쟁사 광고 소재 리서치 에이전트 MVP 제안 — 메디큐브 콘텐츠마케팅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5f6;--card:#fff;--ink:#17141a;--sub:#6a6168;--line:#e9e2e6;--pink:#d63c74;--pink2:#f7dbe6;--pinkbg:#fdf1f5;--amber:#9a5b00;--amberbg:#fff2d6;--green:#1d7a4b;--greenbg:#e2f3e9;--gray:#f0ecee;--dark:#1f1a1e}
+@media (prefers-color-scheme:dark){:root{--bg:#121013;--card:#1c181b;--ink:#f2edf0;--sub:#a99ea6;--line:#2d272b;--pink:#ff6e9e;--pink2:#4a2232;--pinkbg:#2a1820;--amber:#f2b552;--amberbg:#33270f;--green:#61cc93;--greenbg:#14281d;--gray:#262124;--dark:#0b090a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:15px;line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 72px}
+a{color:var(--pink)}
+small,.sub{color:var(--sub)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;vertical-align:1px;margin-left:3px}
+.as{color:var(--amber);background:var(--amberbg)}
+.ok{color:var(--green);background:var(--greenbg)}
+.mi{color:var(--sub);background:var(--gray)}
+/* hero */
+.hero{background:var(--dark);color:#fff;border-radius:0 0 28px 28px;padding:40px 32px 36px;margin:0 -20px 28px}
+@media(min-width:1120px){.hero{margin:0 0 28px}}
+.hero .kick{font-size:13px;font-weight:700;color:#ff8fb5;letter-spacing:.04em}
+.hero h1{font-size:34px;line-height:1.25;font-weight:900;margin:8px 0 12px}
+.hero h1 em{font-style:normal;color:#ff8fb5}
+.hero p{margin:0;color:#d9cfd5;max-width:720px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .meta span{font-size:12px;padding:4px 10px;border-radius:999px;background:#ffffff1a;color:#efe7eb}
+.hero .meta .st{background:#ffcf6b;color:#3a2a00;font-weight:700}
+/* layout */
+section{margin-top:36px}
+h2{font-size:20px;font-weight:900;margin:0 0 6px}
+.lead{color:var(--sub);margin:0 0 16px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g2,.g3{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.num{font-size:12px;font-weight:900;color:var(--pink);letter-spacing:.05em}
+/* tldr */
+.tldr{border:2px solid var(--pink);background:var(--pinkbg)}
+.tldr ol{margin:8px 0 0;padding-left:20px}.tldr li{margin:6px 0}
+/* kpi */
+.kpi .k{font-size:12px;color:var(--sub);font-weight:700}
+.kpi .v{font-size:28px;font-weight:900;line-height:1.2;margin-top:4px}
+.kpi .d{font-size:13px;color:var(--sub);margin-top:4px}
+/* before/after */
+.ba h3{margin:0 0 10px;font-size:16px}
+.bar{display:flex;height:34px;border-radius:9px;overflow:hidden;margin:6px 0}
+.bar span{display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--sub)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:s}
+@media(max-width:860px){.flow{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;position:relative}
+.step b{display:block;font-size:15px;margin-bottom:4px}
+.step .who{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;display:inline-block;margin-bottom:8px}
+.ai{background:var(--pink2);color:var(--pink)}.hu{background:var(--greenbg);color:var(--green)}
+.step p{margin:0;font-size:13px;color:var(--sub)}
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--gray);font-size:12px;color:var(--sub);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.c{font-weight:700;white-space:nowrap}
+.empty td{color:var(--sub);font-style:italic;background:repeating-linear-gradient(45deg,transparent,transparent 8px,var(--gray) 8px,var(--gray) 9px)}
+/* lists */
+ul.x,ul.v{list-style:none;padding:0;margin:0}
+ul.x li,ul.v li{position:relative;padding:8px 0 8px 28px;border-bottom:1px dashed var(--line)}
+ul.x li:last-child,ul.v li:last-child{border-bottom:0}
+ul.x li::before,ul.v li::before{position:absolute;left:0;top:9px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:900}
+ul.x li::before{content:"✕";background:var(--gray);color:var(--sub)}
+ul.v li::before{content:"✓";background:var(--greenbg);color:var(--green)}
+/* competitors */
+.comp h3{margin:0;font-size:17px}.comp .p{font-size:12px;color:var(--sub);margin:2px 0 10px}.comp p{margin:0;font-size:14px}
+/* evidence */
+.ev{border-left:4px solid var(--pink)}
+.ev q{display:block;font-size:15px;font-weight:700;quotes:"“" "”"}
+.ev .src{font-size:12px;color:var(--sub);margin-top:8px}
+.ev .map{display:inline-block;font-size:11px;font-weight:700;color:var(--pink);background:var(--pink2);border-radius:6px;padding:1px 8px;margin-bottom:8px}
+/* qa */
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q.";color:var(--pink);font-weight:900;margin-right:8px}
+details p{margin:10px 0 0;color:var(--ink)}
+details p::before{content:"A. ";font-weight:900;color:var(--green)}
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:860px){.tl{grid-template-columns:1fr}}
+.tl .d{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--pink);border-radius:12px;padding:14px}
+.tl .d b{font-size:13px;color:var(--pink)}.tl .d div{font-size:14px;margin-top:4px}
+/* menu */
+.menu{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.mc h4{margin:0 0 6px;font-size:15px}
+.mc .w{font-size:12px;color:var(--sub)}
+.mc.on{border:2px solid var(--pink)}
+.mc .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.mc .chips span{font-size:11px;background:var(--gray);padding:2px 7px;border-radius:5px}
+.mc.on .chips span{background:var(--pink2);color:var(--pink)}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kick">MVP 제안 · 메디큐브 콘텐츠마케팅팀 · 신입 콘텐츠 마케터</div>
+  <h1>경쟁사 광고 소재 리서치,<br>매일 <em>45분</em>에서 <em>10분</em>으로</h1>
+  <p>매일 아침 손으로 하던 경쟁사 광고 조사를 AI 에이전트에게 맡기는 가장 작은 첫 버전입니다. 에이전트가 찾아서 표로 정리하고, 사람은 출처를 확인하고 판단만 합니다.</p>
+  <div class="meta">
+    <span class="st">상태: 설계 완료 · 파일럿 전</span>
+    <span>작성 2026-11-16</span>
+    <span>경쟁사: 마미케어 · 뉴스킨 · 바나브</span>
+    <span><span class="tag as" style="margin:0">가정</span> = 아직 재지 않은 추정값</span>
+  </div>
+</header>
+
+<!-- TL;DR -->
+<section style="margin-top:0">
+  <div class="card tldr">
+    <div class="num">한 줄 요약 (30초 버전)</div>
+    <ol>
+      <li><b>문제</b> · 경쟁사 3곳 광고를 매일 손으로 찾고 캡처해 엑셀에 옮기는 데 하루 약 45분이 듭니다<span class="tag as">가정</span>.</li>
+      <li><b>제안</b> · 에이전트가 광고 소재를 찾아 7칸 표로 정리하고, 사람은 출처 링크만 확인합니다. 목표는 10분 이하입니다.</li>
+      <li><b>요청</b> · 5일 파일럿만 허락해 주세요. 첫날 손으로 걸린 시간을 실제로 재서 비교하고, 기준을 못 넘으면 접습니다.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="grid g4">
+    <div class="card kpi"><div class="k">지금 (손으로)</div><div class="v">45분/일<span class="tag as">가정</span></div><div class="d">파일럿 첫날 실측으로 확정</div></div>
+    <div class="card kpi"><div class="k">목표 (에이전트 + 검수)</div><div class="v">10분 이하</div><div class="d">약 4분의 1 수준</div></div>
+    <div class="card kpi"><div class="k">못 찾은 칸</div><div class="v">30% 이하</div><div class="d">전체 칸 중 "못 찾음" 비율</div></div>
+    <div class="card kpi"><div class="k">지어낸 값</div><div class="v">0개</div><div class="d">모든 값에 출처 링크 + 날짜</div></div>
+  </div>
+</section>
+
+<!-- problem -->
+<section>
+  <h2>1. 왜 이 조사를 매일 하나</h2>
+  <p class="lead">우리 고객은 관리를 하고 싶고 받고 싶지만 <b>시간이 없고 부작용도 무서운 2535 여성</b>입니다. 퇴근 후 쉬면서 간단하게 관리하고 싶어 합니다. 경쟁사가 이 고객에게 지금 어떤 훅과 메시지로 말을 거는지 알아야, 겹치지 않는 메시지로 먼저 답할 수 있습니다.</p>
+  <div class="grid g2">
+    <div class="card ba">
+      <h3>지금: 손으로 45분<span class="tag as">가정</span></h3>
+      <div class="bar" role="img" aria-label="광고 라이브러리 검색 15분, 릴스·쇼츠 훑기 15분, 캡처·엑셀 정리 15분">
+        <span style="flex:15;background:#b04a73">15분</span><span style="flex:15;background:#8f5878">15분</span><span style="flex:15;background:#6d6670">15분</span>
+      </div>
+      <div class="legend"><span><i style="background:#b04a73"></i>메타 광고 라이브러리 3곳 검색</span><span><i style="background:#8f5878"></i>인스타 릴스·유튜브 쇼츠 훑기</span><span><i style="background:#6d6670"></i>캡처 → 엑셀 → 드라이브</span></div>
+    </div>
+    <div class="card ba">
+      <h3>바꾼 뒤: 10분 이하 (목표)</h3>
+      <div class="bar" role="img" aria-label="에이전트 실행 대기 3분, 사람 출처 확인 5분, 비어 있는 메시지 판단 2분">
+        <span style="flex:3;background:#d63c74">3분</span><span style="flex:5;background:#1d7a4b">5분</span><span style="flex:2;background:#9a5b00">2분</span><span style="flex:35;background:var(--gray);color:var(--sub)">줄어든 시간</span>
+      </div>
+      <div class="legend"><span><i style="background:#d63c74"></i>에이전트가 찾고 표 만들기</span><span><i style="background:#1d7a4b"></i>사람이 출처 링크 확인</span><span><i style="background:#9a5b00"></i>"우리가 비어 있는 메시지" 판단</span></div>
+      <small>시간 배분은 목표치입니다<span class="tag as">가정</span></small>
+    </div>
+  </div>
+</section>
+
+<!-- flow -->
+<section>
+  <h2>2. 에이전트는 이렇게 일합니다</h2>
+  <p class="lead">찾고 옮겨 적는 일은 에이전트가, 확인하고 판단하는 일은 사람이 맡습니다.</p>
+  <div class="flow">
+    <div class="step"><span class="who hu">사람</span><b>① 시작</b><p>"오늘 광고 소재 조사해 줘". 경쟁사 3곳은 고정해 둡니다.</p></div>
+    <div class="step"><span class="who ai">에이전트</span><b>② 찾기</b><p>메타 광고 라이브러리, 공식 인스타·유튜브에서 최근 소재 3~5개씩 찾습니다.</p></div>
+    <div class="step"><span class="who ai">에이전트</span><b>③ 표로 정리</b><p>7칸 CSV에 적고, 모든 줄에 출처 링크와 날짜를 붙입니다. 못 찾은 칸은 "못 찾음"으로 둡니다.</p></div>
+    <div class="step"><span class="who hu">사람</span><b>④ 검수</b><p>링크를 열어 문구가 같은지 확인합니다. 다르면 지우고 다시 돌립니다.</p></div>
+    <div class="step"><span class="who hu">사람</span><b>⑤ 한 줄 판단</b><p>"경쟁사가 말하지 않는 우리 메시지"를 한 줄로 정리해 기획 회의에 가져갑니다.</p></div>
+  </div>
+</section>
+
+<!-- table -->
+<section>
+  <h2>3. 결과물: 매일 쌓이는 표 한 장</h2>
+  <p class="lead">한 줄 = 광고 소재 1개. 경쟁사마다 최근 소재 3~5개를 적습니다. 아래 빗금 줄은 형식 예시이고, 실제 값은 파일럿에서 채웁니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>브랜드·채널</th><th>게재 시작일</th><th>형식</th><th>훅 (첫 3초·첫 줄)</th><th>핵심 메시지</th><th>등장 인물</th><th>행동 유도·혜택</th><th>출처·날짜</th></tr></thead>
+    <tbody>
+      <tr class="empty"><td>경쟁사 / 메타 광고</td><td>YYYY-MM-DD</td><td>릴스 15초</td><td>첫 자막 그대로</td><td>시간 절약 · 부작용·안전 · 효과 · 가격 중 어디?</td><td>모델 / 인플루언서 / 후기 / 제품만</td><td>버튼 문구 + 증정품(ml, g)</td><td>링크 · 확인 날짜</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="card"><b>어디서 찾나</b><br><small>메타 광고 라이브러리(로그인 없이 공개), 브랜드 공식 인스타·유튜브 쇼츠·틱톡 게시물, 광고에 연결된 상세페이지</small></div>
+    <div class="card"><b>못 찾을 수 있는 칸</b><span class="tag mi">표시함</span><br><small>영상 안 자막에만 있는 훅, 로그인해야 보이는 쿠폰가. 광고 성과(노출·클릭·매출)는 공개되지 않아 아예 적지 않습니다.</small></div>
+    <div class="card"><b>저장 방식</b><br><small>CSV, UTF-8 BOM(엑셀에서 한글 안 깨짐). 쉼표·따옴표·줄바꿈이 든 값은 큰따옴표로 감쌉니다. 팀 드라이브에 날짜별로 쌓습니다.</small></div>
+  </div>
+</section>
+
+<!-- competitors -->
+<section>
+  <h2>4. 경쟁사 3곳</h2>
+  <div class="grid g3">
+    <div class="card comp"><h3>마미케어</h3><div class="p">EMS 브이쎄라 · 펜타프라임</div><p>캐릭터 콜라보와 증정품을 앞세운 홈케어 디바이스예요. 2535 여성을 두고 가장 직접적으로 겹칩니다.</p></div>
+    <div class="card comp"><h3>바나브</h3><div class="p">UP6 갈바닉 · UP7 더 멀티 · 버블팝 클렌저</div><p>"집에서 에스테틱처럼"을 내세워서, 퇴근 후 간단하게 관리하고 싶은 우리 고객과 겹칩니다.</p></div>
+    <div class="card comp"><h3>뉴스킨</h3><div class="p">에이지락 라인 · 글로벌 브랜드</div><p>회원 판매 중심이라 공식 광고보다 회원 개인 콘텐츠가 많을 수 있어요<span class="tag as">가정</span>. 우리보다 훨씬 큰 회사라서 파일럿 결과를 보고 다른 곳으로 바꿀 수 있습니다.</p></div>
+  </div>
+</section>
+
+<!-- scope -->
+<section>
+  <h2>5. 이번 MVP에서 하는 것 / 하지 않는 것</h2>
+  <div class="grid g2">
+    <div class="card"><b>하는 것</b>
+      <ul class="v">
+        <li>공개된 광고·게시물만 보고 7칸 표 한 장 만들기</li>
+        <li>모든 값에 출처 링크와 조사한 날짜 붙이기</li>
+        <li>"못 찾음"과 (가정)을 표에 그대로 드러내기</li>
+        <li>매일 같은 형식으로 쌓기 (3일 연속 확인)</li>
+      </ul>
+    </div>
+    <div class="card"><b>하지 않는 것</b>
+      <ul class="x">
+        <li>로그인이 필요한 인스타·틱톡 자동 수집 (막히기 쉽고 계정이 위험해질 수 있음)</li>
+        <li>광고 이미지·영상 파일 내려받기 (링크와 문구만 적음)</li>
+        <li>경쟁사 광고 성과·광고비 추정 (근거 없는 숫자는 만들지 않음)</li>
+        <li>대시보드·알림·매일 자동 실행 (첫 버전은 "한 번 돌리면 표 한 장"까지만)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- evidence -->
+<section>
+  <h2>6. 근거: 이 일은 실제로 마케터의 업무입니다</h2>
+  <p class="lead">콘텐츠·브랜드 마케터 채용 공고 원문을 열어 확인했습니다 (2026-11-16).</p>
+  <div class="grid g2">
+    <div class="card ev"><span class="map">경쟁사 조사 → 주요업무</span><q>경쟁사 및 시장 트렌드 분석을 통한 신규 콘텐츠 아이디어 발굴</q><div class="src">(주)비마이마케터 · 콘텐츠마케터(신입/경력) · <a href="https://career.rememberapp.co.kr/job/posting/346994">리멤버</a></div></div>
+    <div class="card ev"><span class="map">조사로 개선안 → 주요업무</span><q>광고 성과 데이터 기반 콘텐츠 성과 분석 및 개선안 도출</q><div class="src">(주)비마이마케터 · 같은 공고</div></div>
+    <div class="card ev"><span class="map">생성형 AI 활용 → 우대사항</span><q>AI 툴을 능숙하게 활용해 업무의 생산성과 정확도를 높이는 분</q><div class="src">(주)구다이글로벌 · [피스마이너스원뷰티] 브랜드 캠페인 마케터 · <a href="https://career.rememberapp.co.kr/job/posting/345850">리멤버</a></div></div>
+    <div class="card ev"><span class="map">AI·자동화 → 담당업무</span><q>AI 도구를 활용한 콘텐츠 제작 및 마케팅 자동화</q><div class="src">콘다㈜ · 콘텐츠 플랫폼 마케팅/브랜드 매니저 · <a href="https://m.jobkorea.co.kr/Recruit/GIReadDetailContentIframe/48904749?GI_No=50656564">잡코리아</a></div></div>
+  </div>
+  <div class="card" style="margin-top:14px"><b>참고 사례</b> · 수업 1교시 강사님 사례에서는 광고 리서치 에이전트(스니핏)로 같은 일이 약 5분의 1로 줄었다고 들었습니다<span class="tag as">가정</span>. 직접 확인한 숫자가 아니라서, 이번 파일럿에서 우리 숫자로 다시 잽니다.</div>
+</section>
+
+<!-- QA -->
+<section>
+  <h2>7. 예상 질문</h2>
+  <details open><summary>AI가 틀린 내용을 적으면요?</summary><p>모든 값에 출처 링크가 붙고, 사람이 링크를 열어 문구가 같은지 확인합니다. 출처 없는 값은 표에 들어가지 않고, 성공 기준이 "지어낸 값 0개"입니다.</p></details>
+  <details><summary>45분은 어디서 나온 숫자예요?</summary><p>아직 추정입니다. 파일럿 첫날 손으로 같은 조사를 한 번 하면서 실제 시간을 재고, 그 숫자를 기준으로 비교합니다.</p></details>
+  <details><summary>계정이 막히거나 약관 문제는 없나요?</summary><p>로그인이 필요한 곳은 자동으로 수집하지 않습니다. 메타 광고 라이브러리처럼 공개된 정보와 공식 계정의 공개 게시물만 봅니다.</p></details>
+  <details><summary>광고 성과까지 알 수 있나요?</summary><p>아니요. 경쟁사 광고의 노출·클릭·매출은 공개되지 않아서 적지 않습니다. 대신 "어떤 메시지를 얼마나 오래 돌리는지(게재 시작일)"로 흐름을 봅니다.</p></details>
+  <details><summary>추가 비용이 드나요?</summary><p>지금 쓰는 AI 도구와 팀 드라이브로 시작합니다. 추가 비용은 없다고 보고 있습니다<span class="tag as">가정</span>. 비용이 생기면 파일럿 보고서에 따로 적습니다.</p></details>
+  <details><summary>실패하면요?</summary><p>5일째에 기준(10분 이하, 못 찾은 칸 30% 이하, 지어낸 값 0개)을 넘지 못하면 접고, 무엇이 막혔는지만 정리해 보고합니다.</p></details>
+</section>
+
+<!-- plan -->
+<section>
+  <h2>8. 5일 파일럿 계획</h2>
+  <div class="tl">
+    <div class="d"><b>1일차</b><div>손으로 1회 조사하며 실제 시간과 못 찾은 칸을 잰다</div></div>
+    <div class="d"><b>2일차</b><div>에이전트 1회 실행 → 사람 검수 → 시간 기록</div></div>
+    <div class="d"><b>3일차</b><div>같은 형식으로 반복, 틀린 값·빈 칸 원인 메모</div></div>
+    <div class="d"><b>4일차</b><div>3일 연속 같은 형식인지 확인</div></div>
+    <div class="d"><b>5일차</b><div>손 vs 에이전트 비교표 + "비어 있는 메시지" 3줄 보고</div></div>
+  </div>
+</section>
+
+<!-- expand -->
+<section>
+  <h2>9. 잘 되면 같은 틀로 넓힐 수 있는 조사</h2>
+  <p class="lead">조사 대상만 바꾸면 다른 팀의 매일 조사에도 같은 방식을 쓸 수 있습니다.</p>
+  <div class="grid menu">
+    <div class="card mc on"><h4>광고 소재 리서치</h4><div class="w">콘텐츠·퍼포먼스 마케터 · 이번 MVP</div><div class="chips"><span>훅</span><span>약속</span><span>형식</span><span>올린 곳</span><span>시작일</span><span>링크</span></div></div>
+    <div class="card mc"><h4>상세페이지 조사</h4><div class="w">MD·콘텐츠 마케터·CX</div><div class="chips"><span>첫 화면 문구</span><span>근거(수치·인증)</span><span>후기 방식</span><span>구매 유도 장치</span><span>링크</span></div></div>
+    <div class="card mc"><h4>가격 조사</h4><div class="w">MD·온라인 영업</div><div class="chips"><span>제품명</span><span>용량(g·ml)</span><span>판매처(몰)</span><span>판매가</span><span>확인 시각</span></div></div>
+    <div class="card mc"><h4>증정품·프로모션</h4><div class="w">MD·온라인 영업</div><div class="chips"><span>판매처(몰)</span><span>행사</span><span>기간</span><span>조건</span><span>증정품·용량</span></div></div>
+    <div class="card mc"><h4>팝업스토어</h4><div class="w">브랜드·공간 마케터</div><div class="chips"><span>기간</span><span>장소</span><span>체험</span><span>현장 혜택</span><span>예약 방식</span></div></div>
+  </div>
+</section>
+
+<footer>
+  작성: 메디큐브 콘텐츠마케팅팀 신입 (수업 과제용 가상 상황) · 2026-11-16 · <span class="tag as" style="margin:0">가정</span> 표시는 아직 재지 않은 추정값, <span class="tag mi" style="margin:0">못 찾을 수 있음</span>은 공개 웹에서 찾기 어려운 칸입니다.<br>
+  경쟁사 제품 정보 출처: 무신사·11번가 상품 페이지, 얼루어코리아 기사 (2026-11-16 확인)
+</footer>
+</div>
+</body>
+</html>

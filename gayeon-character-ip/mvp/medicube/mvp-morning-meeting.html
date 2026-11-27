@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아침회의 MVP — 메디큐브 콘텐츠마케팅 신입: 경쟁사 콘텐츠 리서치 에이전트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f5f6;--card:#fff;--ink:#17141a;--sub:#6a6168;--line:#e9e2e6;--pink:#d63c74;--pink2:#f7dbe6;--pinkbg:#fdf1f5;--amber:#9a5b00;--amberbg:#fff2d6;--green:#1d7a4b;--greenbg:#e2f3e9;--gray:#f0ecee;--dark:#1f1a1e}
+@media (prefers-color-scheme:dark){:root{--bg:#121013;--card:#1c181b;--ink:#f2edf0;--sub:#a99ea6;--line:#2d272b;--pink:#ff6e9e;--pink2:#4a2232;--pinkbg:#2a1820;--amber:#f2b552;--amberbg:#33270f;--green:#61cc93;--greenbg:#14281d;--gray:#262124;--dark:#0b090a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:15px;line-height:1.65}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 72px}
+a{color:var(--pink)}
+small,.sub{color:var(--sub)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;vertical-align:1px;margin-left:3px}
+.as{color:var(--amber);background:var(--amberbg)}.mi{color:var(--sub);background:var(--gray)}.ok{color:var(--green);background:var(--greenbg)}
+.hero{background:var(--dark);color:#fff;border-radius:0 0 28px 28px;padding:40px 32px 34px;margin:0 -20px 28px}
+@media(min-width:1120px){.hero{margin:0 0 28px}}
+.hero .kick{font-size:13px;font-weight:700;color:#ff8fb5;letter-spacing:.04em}
+.hero h1{font-size:32px;line-height:1.28;font-weight:900;margin:8px 0 12px}
+.hero h1 em{font-style:normal;color:#ff8fb5}
+.hero p{margin:0;color:#d9cfd5;max-width:760px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .meta span{font-size:12px;padding:4px 10px;border-radius:999px;background:#ffffff1a;color:#efe7eb}
+.hero .meta .st{background:#ffcf6b;color:#3a2a00;font-weight:700}
+section{margin-top:38px}
+h2{font-size:20px;font-weight:900;margin:0 0 6px}
+h2 .n{color:var(--pink);margin-right:6px}
+.lead{color:var(--sub);margin:0 0 16px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g2,.g3{grid-template-columns:1fr}.g4{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.tldr{border:2px solid var(--pink);background:var(--pinkbg)}
+.tldr ol{margin:8px 0 0;padding-left:20px}.tldr li{margin:6px 0}
+.lbl{font-size:12px;font-weight:900;color:var(--pink);letter-spacing:.05em}
+.q{border-left:4px solid var(--pink)}
+.q .src{font-size:12px;color:var(--sub);margin-top:8px}
+.q blockquote{margin:6px 0 0;font-size:15px;font-weight:700}
+.q .map{display:inline-block;font-size:11px;font-weight:700;color:var(--pink);background:var(--pink2);border-radius:6px;padding:1px 8px}
+/* why chain */
+.why{display:grid;gap:0}
+.wrow{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:start;padding:18px 0;border-bottom:1px dashed var(--line)}
+.wrow:last-child{border-bottom:0}
+.wrow .lv{font-size:12px;font-weight:900;color:#fff;background:var(--pink);border-radius:10px;padding:8px 10px;text-align:center}
+.wrow:nth-child(2) .lv{background:#b04a73}.wrow:nth-child(3) .lv{background:#8f5878}.wrow:nth-child(4) .lv{background:var(--dark)}
+.wrow h3{margin:0 0 4px;font-size:16px}
+.wrow p{margin:0;font-size:14px}
+@media(max-width:600px){.wrow{grid-template-columns:1fr}}
+/* cycle */
+.cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch}
+@media(max-width:860px){.cycle{grid-template-columns:1fr}}
+.cs{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;position:relative}
+.cs.me{border:2px solid var(--pink);background:var(--pinkbg)}
+.cs .who{font-size:11px;font-weight:700;color:var(--sub)}
+.cs b{display:block;font-size:15px;margin:2px 0 4px}
+.cs p{margin:0;font-size:13px;color:var(--sub)}
+.loop{margin-top:8px;font-size:13px;color:var(--sub);text-align:center}
+/* stats */
+.bars .row{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;margin:9px 0;font-size:14px}
+.bars .track{height:14px;background:var(--gray);border-radius:7px;overflow:hidden}
+.bars .fill{height:100%;background:var(--pink);border-radius:7px}
+.bars .pct{font-weight:900;text-align:right}
+@media(max-width:600px){.bars .row{grid-template-columns:110px 1fr 40px}}
+/* table */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--gray);font-size:12px;color:var(--sub);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.c{font-weight:700;white-space:nowrap}
+.new{display:inline-block;font-size:10px;font-weight:900;color:#fff;background:var(--pink);border-radius:5px;padding:0 6px;margin-left:4px;vertical-align:2px}
+/* matrix */
+.mx th,.mx td{text-align:center}
+.mx td:first-child,.mx th:first-child{text-align:left}
+.cell{display:inline-block;min-width:54px;padding:4px 8px;border-radius:8px;background:var(--gray);color:var(--sub);font-size:12px}
+.cell.gap{background:var(--pink2);color:var(--pink);font-weight:900}
+/* meeting */
+.meet{background:var(--dark);color:#fff;border-radius:18px;padding:24px}
+.meet .lbl{color:#ff8fb5}
+.meet ol{margin:10px 0 0;padding-left:22px}.meet li{margin:10px 0;color:#efe7eb}
+.meet .blank{display:inline-block;min-width:180px;border-bottom:2px dotted #ffffff66;color:#ffffff88;font-size:13px}
+ul.x,ul.v{list-style:none;padding:0;margin:0}
+ul.x li,ul.v li{position:relative;padding:8px 0 8px 28px;border-bottom:1px dashed var(--line)}
+ul.x li:last-child,ul.v li:last-child{border-bottom:0}
+ul.x li::before,ul.v li::before{position:absolute;left:0;top:9px;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:900}
+ul.x li::before{content:"✕";background:var(--gray);color:var(--sub)}
+ul.v li::before{content:"✓";background:var(--greenbg);color:var(--green)}
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:860px){.tl{grid-template-columns:1fr}}
+.tl .d{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--pink);border-radius:12px;padding:14px}
+.tl .d b{font-size:13px;color:var(--pink)}.tl .d div{font-size:14px;margin-top:4px}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q.";color:var(--pink);font-weight:900;margin-right:8px}
+details p{margin:10px 0 0}
+details p::before{content:"A. ";font-weight:900;color:var(--green)}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--sub)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kick">아침회의 MVP · 메디큐브 마케팅실 콘텐츠마케팅 · 신입</div>
+  <h1>경쟁사 콘텐츠 리서치를 에이전트에게 맡기고,<br>아침회의엔 <em>표</em>가 아니라 <em>오늘의 소재 아이디어 3개</em>를 가져갑니다</h1>
+  <p>메디큐브 신입 공고에 적힌 첫 업무, "경쟁사 콘텐츠 리서치 및 레퍼런스 정리"를 매일 45분에서 10분으로 줄이는 가장 작은 첫 버전입니다. 그리고 왜 그 리서치를 시키는지 한 단계 더 파고들어, 결과물을 표가 아닌 다음 소재로 이어지는 형태로 바꿨습니다.</p>
+  <div class="meta">
+    <span class="st">상태: 파일럿 1회차 완료 (11-16 실제 조사)</span>
+    <span>2026-11-16 (월) 아침회의</span>
+    <span>경쟁사: 마미케어 · 뷰앤디 · 듀얼소닉 (신호로 선정)</span>
+    <span>근거: 콘텐츠 마케팅 공고 91건 + 메디큐브 실제 공고 2건</span>
+  </div>
+</header>
+
+<section style="margin-top:0">
+  <div class="card tldr">
+    <div class="lbl">회의 30초 요약</div>
+    <ol>
+      <li><b>이 일은 실제로 제 첫 업무입니다.</b> 메디큐브 신입 공고 주요업무에 "경쟁사 콘텐츠 리서치 및 레퍼런스 정리"와 "성과 리포트 작성"이 그대로 있습니다.</li>
+      <li><b>리서치의 목적은 표가 아니라 다음 소재입니다.</b> 같은 팀 경력 공고를 보면, 이 리서치는 "USP·타깃 분석 → 소재 기획 → A/B 테스트 → CTR·CPA·ROAS"로 이어지는 사이클의 첫 칸입니다.</li>
+      <li><b>그래서 MVP 결과물을 바꿨습니다.</b> 경쟁사 소재 표 + 소구 지도(경쟁사가 비워 둔 메시지) + 오늘의 소재 아이디어 3개입니다.</li>
+      <li><b>오늘 실제로 돌려 봤습니다.</b> 경쟁사는 "광고를 많이·오래 돌리고, 팔리고 있다는 신호가 있는 곳"으로 다시 골랐습니다(마미케어·뷰앤디·듀얼소닉). 15개 소재 중 가격·혜택 11개, 효과 10개, 시간 절약 4개였고 <b>부작용·자극 안심은 0개</b>였습니다. 이 빈칸이 오늘의 소재 아이디어입니다.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 1. evidence -->
+<section>
+  <h2><span class="n">01</span>이 일은 메디큐브 신입의 실제 업무입니다</h2>
+  <p class="lead">받은 공고 데이터(사람인·잡코리아 91건)에 에이피알 메디큐브 마케팅실 공고 2건이 있었습니다. 신입 공고 마감은 2026-11-22입니다.</p>
+  <div class="grid g3">
+    <div class="card q"><span class="map">신입 · 주요업무</span><blockquote>뷰티 콘텐츠·숏폼 트렌드, 경쟁사 콘텐츠 리서치 및 레퍼런스 정리</blockquote><div class="src">㈜에이피알 · [마케팅 특별채용] 국내 콘텐츠 마케팅 신입 · <a href="https://www.jobkorea.co.kr/Recruit/GI_Read/50289890">잡코리아</a></div></div>
+    <div class="card q"><span class="map">신입 · 주요업무</span><blockquote>채널 별 콘텐츠 데이터 및 광고 지표 수집, 성과 리포트 작성</blockquote><div class="src">같은 공고</div></div>
+    <div class="card q"><span class="map">신입 · 주요업무</span><blockquote>매체별 규격·특성에 맞춘 숏폼·이미지 광고 소재 제작</blockquote><div class="src">같은 공고</div></div>
+  </div>
+</section>
+
+<!-- 2. why deeper -->
+<section>
+  <h2><span class="n">02</span>한 단계 더: 회사는 왜 신입에게 이 리서치를 시킬까</h2>
+  <p class="lead">"조사해서 표로 정리"에서 멈추면 반만 한 겁니다. 왜를 세 번 따라가 봤습니다.</p>
+  <div class="card why">
+    <div class="wrow"><div class="lv">겉으로 보이는 일</div><div><h3>경쟁사 광고를 찾아 캡처하고 표에 옮긴다</h3><p>신입 공고 문장 그대로입니다. 손으로 하면 매일 약 45분이 듭니다<span class="tag as">가정</span>.</p></div></div>
+    <div class="wrow"><div class="lv">왜? ①</div><div><h3>다음 광고 소재의 재료가 필요해서</h3><p>같은 팀 경력 공고의 첫 업무가 "제품 USP·타깃 분석 기반 콘텐츠 메시지 전략 수립"입니다. 경쟁사가 이미 쓰는 메시지를 알아야 우리 메시지를 다르게 잡을 수 있습니다.</p></div></div>
+    <div class="wrow"><div class="lv">왜? ②</div><div><h3>소재는 숫자로 평가받기 때문에</h3><p>경력 공고는 "광고 소재, 상세페이지 A/B 테스트 설계, CTR·CPA·ROAS 등 결과를 반영한 소재 고도화"를 요구합니다. 시장 전체로 봐도 콘텐츠 마케터 공고의 중심은 매출 전환형 콘텐츠(퍼포먼스·광고소재형, CRM·자사몰형)입니다. 리서치는 A/B 테스트에 넣을 <b>가설 후보</b>를 만드는 일입니다.</p></div></div>
+    <div class="wrow"><div class="lv">그래서</div><div><h3>신입이 가져와야 할 것은 "표"가 아니라 "테스트할 가설"</h3><p>경쟁사가 어떤 소구를 많이 쓰고, 어떤 소구를 비워 뒀는지. 그 빈칸이 우리 고객의 걱정(시간이 없다, 부작용이 무섭다)과 겹친다면 그게 오늘의 소재 아이디어입니다. 에이전트로 줄인 35분은 이 판단에 씁니다.</p></div></div>
+  </div>
+
+  <div style="margin-top:16px">
+    <div class="cycle">
+      <div class="cs me"><div class="who">신입 · 이번 MVP</div><b>① 경쟁사 리서치</b><p>경쟁사 소재·훅·소구를 모으고 레퍼런스 정리</p></div>
+      <div class="cs"><div class="who">주니어</div><b>② 소구 도출</b><p>USP·타깃 분석으로 메시지 정하기</p></div>
+      <div class="cs"><div class="who">주니어</div><b>③ 소재 기획·제작</b><p>매체별 숏폼·이미지 소재</p></div>
+      <div class="cs"><div class="who">주니어~미들</div><b>④ A/B 테스트</b><p>소재·상세페이지 비교</p></div>
+      <div class="cs"><div class="who">팀</div><b>⑤ CTR·CPA·ROAS</b><p>숫자로 읽고 다음 소재에 반영</p></div>
+    </div>
+    <div class="loop">↻ ⑤의 결과가 다시 ①의 질문이 됩니다. "이긴 소재의 소구를 경쟁사도 쓰고 있나?"</div>
+  </div>
+</section>
+
+<!-- 3. market -->
+<section>
+  <h2><span class="n">03</span>시장도 같은 걸 요구합니다</h2>
+  <p class="lead">받은 공고 데이터 91건 중 중복을 뺀 86건을, 신입 지원이 가능한 47건만 따로 세 봤습니다. 본문 낱말로 센 숫자라 몇 %p 오차가 있습니다.</p>
+  <div class="grid g2">
+    <div class="card bars">
+      <b>신입 가능 공고 47건 중 언급 비율</b>
+      <div class="row"><span>생성형 AI</span><div class="track"><div class="fill" style="width:40%"></div></div><span class="pct">40%</span></div>
+      <div class="row"><span>리서치·조사·모니터링</span><div class="track"><div class="fill" style="width:36%"></div></div><span class="pct">36%</span></div>
+      <div class="row"><span>광고 소재</span><div class="track"><div class="fill" style="width:36%"></div></div><span class="pct">36%</span></div>
+      <div class="row"><span>트렌드 리서치</span><div class="track"><div class="fill" style="width:19%"></div></div><span class="pct">19%</span></div>
+      <div class="row"><span>경쟁사·벤치마킹</span><div class="track"><div class="fill" style="width:17%"></div></div><span class="pct">17%</span></div>
+      <div class="row"><span>리포트·보고서</span><div class="track"><div class="fill" style="width:17%"></div></div><span class="pct">17%</span></div>
+    </div>
+    <div class="card">
+      <b>읽은 것</b>
+      <ul class="v" style="margin-top:6px">
+        <li>신입에게 기대하는 일은 리서치·레퍼런스 정리, 초안 제작, 성과 정리·리포트입니다.</li>
+        <li>생성형 AI는 신입 공고에서도 10곳 중 4곳이 언급합니다. "써 봤다"가 아니라 업무에 쓰는 사람을 찾습니다.</li>
+        <li>콘텐츠와 퍼포먼스의 경계가 흐려지고 있습니다. 그래서 리서치도 "예쁜 레퍼런스"보다 "팔리는 소구"를 봐야 합니다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4. output -->
+<section>
+  <h2><span class="n">04</span>MVP 결과물: 표 1장 + 소구 지도 + 아이디어 3개</h2>
+  <p class="lead">한 줄 = 광고 소재 1개, 경쟁사마다 최근 소재 3~5개. 아래 표는 칸 정의이며 실제 값은 파일럿에서 채웁니다.</p>
+  <div class="tw"><table>
+    <thead><tr><th>칸</th><th>적는 방법</th><th>어디서</th></tr></thead>
+    <tbody>
+      <tr><td class="c">브랜드·채널</td><td>경쟁사 + 메타 광고 / 인스타 / 유튜브 쇼츠 / 틱톡</td><td>메타 광고 라이브러리, 공식 계정</td></tr>
+      <tr><td class="c">게재 시작일 · 게재 일수<span class="new">추가</span></td><td>YYYY-MM-DD, 오늘까지 며칠째 돌고 있나</td><td>광고 라이브러리의 '게재 시작'</td></tr>
+      <tr><td class="c">형식</td><td>숏폼(초) / 이미지 / 캐러셀(장)</td><td>광고 라이브러리, 게시물</td></tr>
+      <tr><td class="c">훅</td><td>첫 3초 자막이나 첫 줄 그대로</td><td>광고 미리보기<span class="tag mi">못 찾을 수 있음</span></td></tr>
+      <tr><td class="c">소구<span class="new">바꿈</span></td><td>4개 중 고르기: 시간 절약 · 부작용·안전 · 효과 · 가격·혜택</td><td>광고 문구, 캡션</td></tr>
+      <tr><td class="c">등장 인물</td><td>모델 / 인플루언서 / 일반인 후기(UGC) / 제품만</td><td>소재 화면</td></tr>
+      <tr><td class="c">행동 유도·혜택</td><td>버튼 문구 + 증정품(ml, g)</td><td>광고 버튼, 상세페이지<span class="tag mi">못 찾을 수 있음</span></td></tr>
+      <tr><td class="c">출처·날짜</td><td>소재마다 링크 + 확인 날짜</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="font-size:13px;margin-top:8px">게재 일수를 넣은 이유: 경쟁사의 성과 숫자는 공개되지 않습니다. 오래 돌리는 소재는 잘 되고 있을 가능성이 있다고 보고, 성과를 대신 가늠하는 신호로 씁니다<span class="tag as">가정</span>.</p>
+</section>
+
+<!-- pilot results -->
+<section>
+  <h2><span class="n">05</span>오늘 실제로 돌려 본 결과 (파일럿 1회차 · 2026-11-16)</h2>
+  <p class="lead">메타 광고 라이브러리(대한민국, 게재 중인 광고), 구글 광고 투명성 센터, 경쟁사 공식몰 상세페이지를 내장 브라우저로 직접 열어 봤습니다. 아래 문구는 광고와 페이지에서 그대로 옮긴 것이고, 소구 분류만 사람 판단입니다<span class="tag as">가정</span>.</p>
+
+  <div class="card" style="border-left:4px solid var(--pink)">
+    <b>경쟁사는 매번 "지금 잘 되고 있을 신호"로 다시 고릅니다</b>
+    <div class="grid g4" style="margin-top:12px">
+      <div><div class="lbl">신호 1</div><small>메타에서 게재 중인 광고가 많고, 오래 돌리는 소재가 있다</small></div>
+      <div><div class="lbl">신호 2</div><small>랭킹·누적 판매·품절 공지처럼 팔리고 있다는 공개 신호가 있다</small></div>
+      <div><div class="lbl">신호 3</div><small>같은 고객(2535 여성, 홈케어 디바이스)을 두고 경쟁한다</small></div>
+      <div><div class="lbl">제외</div><small>우리보다 훨씬 큰 대기업 (예: 아모레퍼시픽 메이크온)</small></div>
+    </div>
+    <div class="tw" style="margin-top:12px"><table>
+      <thead><tr><th>브랜드</th><th>메타 게재 중 광고</th><th>판단</th></tr></thead>
+      <tbody>
+        <tr><td class="c">마미케어</td><td>약 670개 (키워드 검색)</td><td><span class="tag ok">유지</span> 블프 소재를 계속 새로 올리고, 297일째 도는 소재가 있음</td></tr>
+        <tr><td class="c">뷰앤디</td><td>약 63개</td><td><span class="tag ok">새로 넣음</span> 크리에이터 광고 다수. 공식몰에 "누적 판매 290,000대", "주문 폭주" 공지</td></tr>
+        <tr><td class="c">듀얼소닉</td><td>약 28개</td><td><span class="tag ok">새로 넣음</span> 10월 말부터 브랜드 소재를 몰아서 새로 시작함. 고가 집중초음파 라인</td></tr>
+        <tr><td class="c" style="color:var(--sub)">바나브</td><td>0개</td><td><span class="tag mi">뺌</span> '바나브', 'vanav'로 브랜드 활성 광고 못 찾음</td></tr>
+        <tr><td class="c" style="color:var(--sub)">뉴스킨</td><td>0개</td><td><span class="tag mi">뺌</span> 브랜드 광고 못 찾음. 회원 판매 중심이라 이 조사와 맞지 않음</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <h3 style="margin:22px 0 8px;font-size:16px">광고 소재 표 (메타 광고 라이브러리, 노출 많은 순에서 옮김)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>브랜드</th><th>시작일 · 게재 일수</th><th>형식</th><th>훅 (첫 줄 그대로)</th><th>소구</th><th>인물</th><th>행동 유도·혜택</th><th>라이브러리 ID</th></tr></thead>
+    <tbody>
+      <tr><td class="c">마미케어</td><td>2026-01-23 · 297일</td><td>영상 13초</td><td>💜보라돌이들 주목!!!!💜 퍼플 브이쎄라 출시</td><td>가격</td><td>제품</td><td>출시 기념 7만원대 행사 / 효과 없을 시 100% 환불</td><td>928336379839801</td></tr>
+      <tr><td class="c">마미케어</td><td>2026-05-13 · 187일</td><td>영상 41초</td><td>💜역대급 탄력 디바이스💜 드디어 특가 떴습니다</td><td>효과 · 가격</td><td>못 찾음</td><td>"관리샵(인*드)과 동일 주파수", 무료체험 신청</td><td>2185908932263625</td></tr>
+      <tr><td class="c">마미케어</td><td>2026-06-05 · 164일</td><td>영상 45초</td><td>디바이스 명가에서 나온 신제품 티탄샷!</td><td>효과 · 가격</td><td>못 찾음</td><td>"이중턱, 팔자주름, 심부볼 개선" / 최저가 비밀링크</td><td>1531648018351782</td></tr>
+      <tr><td class="c">마미케어</td><td>2026-09-14 · 63일</td><td>영상 37초</td><td>브이쎄라 사면 올인원 디바이스 하나 더 준다</td><td>가격·혜택</td><td>못 찾음</td><td>딱 3일 남은 1+1+1 특가 / 효과없으면 무료환불</td><td>1128614109828153</td></tr>
+      <tr><td class="c">마미케어</td><td>2026-11-06 · 10일</td><td>영상 12초</td><td>♥️관리왕 츄♥️가 선택한 디바이스SET??</td><td>가격·혜택</td><td>모델(츄)</td><td>블프 1+1+1+1, 100대 한정</td><td>4644991989096380</td></tr>
+      <tr><td class="c">마미케어</td><td>2026-11-10 · 6일</td><td>영상 48초</td><td>드디어 1년에 딱 한번! 블프 시작⁉️</td><td>가격·혜택</td><td>못 찾음</td><td>펜타프라임 99,000원 역대 최저가 / 효과 없으면 무료환불 100%</td><td>1599194548191005</td></tr>
+      <tr style="background:var(--pinkbg)"><td class="c">마미케어</td><td>2026-09-29 · 48일</td><td>영상 46초</td><td>대학생들 사이에서 요즘 이런 거 한다며? 👀</td><td>시간 · 가격</td><td>크리에이터</td><td>"10분 정도 간편하게", "따로 시간 내서 관리받으러 가지 않아도"</td><td>1090002690320881</td></tr>
+      <tr style="background:var(--pinkbg)"><td class="c">뷰앤디</td><td>2026-08-06 · 102일</td><td>영상 1분 2초</td><td>🥇출시하자마자 올영 1위 무신사 1위</td><td><b>시간</b> · 효과 · 가격</td><td>크리에이터</td><td>"하루에 딱 15분만 투자하면 케어 싹", "두 손 두 발 자유롭게" / 57% 할인</td><td>2631521643972733</td></tr>
+      <tr style="background:var(--pinkbg)"><td class="c">뷰앤디</td><td>2026-08-06 · 102일</td><td>영상 1분 6초</td><td>아이돌도 내돈내산? 인스타 핫템 리얼후기😶</td><td>효과 · 가격</td><td>크리에이터</td><td>"처진 턱 부위 탄력 105% 개선", "1년간 누적 판매 100억원" / 최대 57% 할인</td><td>2032133474095820</td></tr>
+      <tr style="background:var(--pinkbg)"><td class="c">뷰앤디</td><td>2026-08-06 · 102일</td><td>영상 45초</td><td>렐라 턱선 만들기 프로젝트👽</td><td>효과 · 가격</td><td>크리에이터</td><td>"근적외선 온열+EMS", 6가지 모드 / 기간 한정 60% 할인</td><td>2073089173414969</td></tr>
+      <tr style="background:var(--pinkbg)"><td class="c">뷰앤디</td><td>2026-08-19 · 89일</td><td>영상 52초</td><td>#광고 솔직빼면시체인 제가 자신있게 광고 받겠다 한 뷰앤디</td><td>효과 · 간편 · 가격</td><td>크리에이터</td><td>"아침붓기 빼는데 너무 간편" / 공식몰 10만원대</td><td>1093407493216764</td></tr>
+      <tr><td class="c">듀얼소닉</td><td>2026-10-28 · 19일</td><td>못 찾음</td><td>[듀얼소닉] 단 6분, 탄력을 위한 새로운 루틴!</td><td><b>시간</b> · 효과</td><td>못 찾음</td><td>"1샷 13도트", "카트리지 교체 부담 없이 사용할 수 있는 무한샷"</td><td>39600303399584520</td></tr>
+      <tr><td class="c">듀얼소닉</td><td>2026-10-28 · 19일</td><td>못 찾음</td><td>[듀얼소닉] 한 번의 샷도, 더 촘촘하고 섬세하게</td><td>효과</td><td>못 찾음</td><td>"1샷에 26도트로 완성하는 하이엔드 집중초음파 케어" (같은 문구 소재 5개 이상)</td><td>29795157660087204</td></tr>
+      <tr><td class="c">듀얼소닉</td><td>2026-11-02 · 14일</td><td>영상 34초</td><td>10년의 기술력으로 완성한 듀얼소닉✨</td><td>효과</td><td>못 찾음</td><td>"탄력부터 윤곽까지 빈틈없이 집중 케어"</td><td>998883455870719</td></tr>
+      <tr><td class="c">듀얼소닉</td><td>2026-10-28 · 19일</td><td>못 찾음</td><td>듀얼소닉과 함께 탄력부터 광채까지</td><td>효과</td><td>못 찾음</td><td>네이버 브랜드스토어로 연결 / "깊이의 차이가 탄력의 차이"</td><td>1599190774832393</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="font-size:12px;margin-top:6px">출처: Meta 광고 라이브러리, 대한민국, 브랜드 이름 키워드, 게재 중, 2026-11-16 확인. 게재 일수는 시작일부터 11-16까지 계산. 분홍 줄은 브랜드와 파트너십 표시가 붙은 크리에이터 광고. "탄력 105%", "누적 100억" 같은 숫자는 크리에이터 광고 속 주장이라 직접 확인하지 않았습니다. 형식 "못 찾음"은 라이브러리 화면에 영상 길이가 보이지 않은 소재입니다.</p>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <b>소구 지도 (오늘 옮긴 소재 기준, 사람이 분류<span class="tag as">가정</span>)</b>
+      <div class="tw" style="margin-top:10px;border:0"><table class="mx">
+        <thead><tr><th>소재</th><th>시간 절약</th><th>부작용·자극 안심</th><th>효과</th><th>가격·혜택</th></tr></thead>
+        <tbody>
+          <tr><td>마미케어 (7)</td><td><span class="cell">1</span></td><td><span class="cell gap">0</span></td><td><span class="cell">2</span></td><td><span class="cell">7</span></td></tr>
+          <tr><td>뷰앤디 (4)</td><td><span class="cell">2</span></td><td><span class="cell gap">0</span></td><td><span class="cell">4</span></td><td><span class="cell">4</span></td></tr>
+          <tr><td>듀얼소닉 (4)</td><td><span class="cell">1</span></td><td><span class="cell gap">0</span></td><td><span class="cell">4</span></td><td><span class="cell">0</span></td></tr>
+          <tr><td><b>합계 (15)</b></td><td><span class="cell">4</span></td><td><span class="cell gap">0 · 빈칸</span></td><td><span class="cell">10</span></td><td><span class="cell">11</span></td></tr>
+        </tbody>
+      </table></div>
+      <small>세 브랜드가 서로 다르게 싸웁니다. 마미케어는 <b>가격 + 환불 보장</b>, 뷰앤디는 <b>크리에이터 후기 + 효과 숫자 + 간편함</b>, 듀얼소닉은 <b>기술(도트·샷) + 프리미엄</b>입니다. 시간 절약은 셋 다 쓰고 있어 빈칸이 아닙니다. "효과 없으면 환불"은 <b>돈</b>에 대한 안심이지 <b>피부</b>에 대한 안심은 아닙니다.</small>
+    </div>
+    <div class="meet">
+      <div class="lbl">아침회의 3줄 (오늘 결과)</div>
+      <ol>
+        <li><b>경쟁사가 가장 많이 쓴 소구:</b> 가격·혜택(11/15)과 효과(10/15). 블프 시즌이라 마미케어·뷰앤디 모두 50~60%대 할인을 앞세웁니다.</li>
+        <li><b>가장 오래 도는 소재:</b> 마미케어 퍼플 브이쎄라(297일째), 뷰앤디 크리에이터 광고 4개(89~102일째). 뷰앤디는 공식몰에 "주문 폭주, 재고 소진 예상" 공지까지 걸었습니다. 잘 되고 있을 신호로 봅니다<span class="tag as" style="background:#ffffff22;color:#ffcf6b">가정</span>.</li>
+        <li><b>비어 있는 소구:</b> <b>부작용·자극 안심</b>. 15개 소재 중 0개입니다. 우리 고객의 걱정 그대로입니다.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3 style="margin:22px 0 8px;font-size:16px">오늘의 소재 아이디어 3개 (제 제안 · 검토 필요)</h3>
+  <div class="grid g3">
+    <div class="card"><div class="lbl">아이디어 1 · 자극 안심</div><b>"따끔할까 봐 못 샀다면"</b><p style="font-size:14px;margin:6px 0 0">숏폼 첫 장면: 손등에 먼저 대 보기 → 가장 낮은 강도부터 올려 보기 → 자극 관련 시험 결과 한 줄.</p><small>주의: 시험 근거 자료가 있을 때만 씁니다. 없으면 "강도 조절"까지만 말합니다.</small></div>
+    <div class="card"><div class="lbl">아이디어 2 · 시간 + 안심 묶기</div><b>"퇴근 후 12분, 따끔함 걱정 없이"</b><p style="font-size:14px;margin:6px 0 0">시간 절약은 경쟁사도 쓰니 단독으로는 약합니다. 메디큐브 광고에 이미 있는 "하루 12분"에 자극 안심을 붙여 경쟁사가 안 쓰는 조합으로 만듭니다.</p><small>근거: 메디큐브 광고 문구 "하루 12분" (라이브러리 ID 1256459566650059)</small></div>
+    <div class="card"><div class="lbl">아이디어 3 · 블프 가격전 피하기</div><b>"처음 쓰는 날 가이드"</b><p style="font-size:14px;margin:6px 0 0">경쟁사가 50~60% 할인을 외칠 때, 민감 피부 첫 주 사용법(어디에, 몇 분, 어떤 강도)을 보여 주는 정보형 소재로 차별화합니다.</p><small>효과 검증은 우리 A/B 테스트에서. 오늘은 가설입니다.</small></div>
+  </div>
+
+  <h3 style="margin:22px 0 8px;font-size:16px">경쟁사 상세페이지 (2026-11-16 확인)</h3>
+  <div class="tw"><table>
+    <thead><tr><th>칸</th><th>마미케어 · 블프 디바이스 골라담기</th><th>뷰앤디 · 앤모드 PRO</th><th>듀얼소닉</th></tr></thead>
+    <tbody>
+      <tr><td class="c">판매처</td><td>공식몰 mommy-care.co.kr</td><td>공식몰 beaund.com</td><td>공식몰 접속 실패(사이트 인증서 오류) <span class="tag mi">못 찾음</span> · 참고로 컬리 판매 페이지 확인</td></tr>
+      <tr><td class="c">첫 화면 문구</td><td>"10분이면 경락마사지 1시간효과", "얼굴형, 속건조, 피부 고민까지 한번에 해결!"</td><td>"올리브영 1위 디바이스", "현대,롯데 백화점 입점", "26차 완판 &amp; 누적 판매 290,000대"</td><td>(컬리 · 글림빛 원) "집중초음파 윤곽 케어, 6in1 집중초음파 멀티 테크"</td></tr>
+      <tr><td class="c">가격</td><td>정가 200,000원 → 79,500원 (60%)</td><td>소비자가 298,000원 → 129,000원 (57%), 무이자 12개월 월 10,750원</td><td>(컬리) 299,000원 → 259,000원 (13%)</td></tr>
+      <tr><td class="c">근거·안심 장치</td><td>"100% 무료환불+무한쿠폰"</td><td>판매 실적 숫자 + 유통 입점(백화점) <span class="tag mi">시험 수치는 이미지 안</span></td><td>기술 이름(집중초음파, 도트 수) <span class="tag mi">이미지 안</span></td></tr>
+      <tr><td class="c">후기 보여 주는 방식</td><td>이 상품 페이지 후기 0개, 별도 게시판</td><td>이 상품 페이지 리뷰 0개, 별도 리뷰 게시판 · 광고는 크리에이터 후기 중심</td><td>못 찾음</td></tr>
+      <tr><td class="c">구매 유도 장치</td><td>"블프 종료시 정상가로 돌아갑니다", 1초 회원가입 10,000원 쿠폰팩</td><td>"유튜브 풍자테레비에서… 화제가 되어 현재 주문 폭주", 재고 소진 예상 11월 15일 공지, 블프 쿠폰(11-10~12-01), 12,000원 쿠폰팩</td><td>(컬리) +10% 쿠폰, 무료배송</td></tr>
+      <tr><td class="c">상세 본문</td><td>이미지 107장 <span class="tag mi">글자 추출 불가</span></td><td>이미지 83장 <span class="tag mi">글자 추출 불가</span></td><td>이미지 <span class="tag mi">글자 추출 불가</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub" style="font-size:12px;margin-top:6px">출처: mommy-care.co.kr 블프 디바이스 골라담기, beaund.com 앤모드 PRO(product_no=53), kurly.com 듀얼소닉 글림빛 원 (2026-11-16 확인). 같은 제품도 판매처마다 값이 다릅니다.</p>
+
+  <div class="card" style="margin-top:16px;border-left:4px solid var(--amber)">
+    <b>1회차에서 배운 것 (MVP를 이렇게 고칩니다)</b>
+    <ul class="v" style="margin-top:6px">
+      <li><b>경쟁사는 고정하지 않는다:</b> 처음 고른 바나브·뉴스킨은 광고가 없었습니다. 매 회차 신호로 다시 고르는 단계를 넣었습니다.</li>
+      <li><b>한 브랜드만 보면 결론이 틀린다:</b> 마미케어만 볼 때는 "시간 절약"이 비어 보였지만, 뷰앤디·듀얼소닉까지 보니 아니었습니다.</li>
+      <li><b>크리에이터 광고 속 숫자는 따로 표시:</b> "105% 개선", "누적 100억"은 브랜드 발표가 아니라 크리에이터 광고 속 주장입니다.</li>
+      <li><b>못 찾는 칸이 정해져 있다:</b> 구글 광고 문구, 상세페이지 본문(전부 이미지), 일부 공식몰(접속 실패)은 지금 방식으로는 못 채웁니다.</li>
+      <li><b>스니핏은 연결 못 함, 시간도 못 잼:</b> 다음 회차부터 타이머를 켭니다.</li>
+    </ul>
+  </div>
+</section>
+<!-- 5. scope & criteria -->
+<section>
+  <h2><span class="n">06</span>범위와 성공 기준</h2>
+  <div class="grid g3">
+    <div class="card"><b>하는 것</b>
+      <ul class="v"><li>공개 광고·게시물로 표 1장</li><li>소구 지도 + 아이디어 3개</li><li>모든 값에 출처 링크·날짜</li><li>"못 찾음"과 (가정) 그대로 표시</li></ul></div>
+    <div class="card"><b>하지 않는 것</b>
+      <ul class="x"><li>로그인 필요한 인스타·틱톡 자동 수집</li><li>광고 이미지·영상 파일 내려받기</li><li>경쟁사 성과·광고비 추정</li><li>대시보드·알림·자동 실행</li></ul></div>
+    <div class="card"><b>성공 기준 (5일째 판단)</b>
+      <ul class="v"><li>준비 시간 10분 이하 (지금 약 45분<span class="tag as">가정</span>)</li><li>못 찾은 칸 30% 이하</li><li>지어낸 값 0개</li><li>아이디어 3개 중 1개 이상이 팀 소재 후보로 채택</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">07</span>남은 4일 파일럿</h2>
+  <div class="tl">
+    <div class="d"><b>월 (오늘)</b><div>1회차 완료. 경쟁사 교체, 소구 지도·아이디어 3개</div></div>
+    <div class="d"><b>화</b><div>타이머 켜고 재실행 + 손으로도 1회 해서 시간 비교</div></div>
+    <div class="d"><b>수</b><div>반복, 틀린 값·빈 칸 원인 메모</div></div>
+    <div class="d"><b>목</b><div>반복, 3일 연속 같은 형식 확인</div></div>
+    <div class="d"><b>금</b><div>손 vs 에이전트 비교 + 채택된 아이디어 수 보고</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">08</span>예상 질문</h2>
+  <details open><summary>경쟁사 광고가 잘 되는지 어떻게 알아요?</summary><p>알 수 없습니다. 노출·클릭·매출은 공개되지 않습니다. 대신 게재 일수를 신호로 보고, 그 판단은 (가정)으로 표시합니다. 진짜 검증은 우리 A/B 테스트에서 합니다.</p></details>
+  <details><summary>AI가 틀리게 적으면요?</summary><p>모든 값에 출처 링크가 붙고, 사람이 열어서 같은 문구인지 확인합니다. 출처 없는 값은 표에 넣지 않습니다.</p></details>
+  <details><summary>경쟁사는 어떻게 골랐어요?</summary><p>처음엔 바나브·뉴스킨을 넣었지만 메타 한국 활성 광고가 없었습니다. 그래서 매 회차 "게재 중 광고 수·게재 일수, 판매 신호(랭킹·누적 판매·품절 공지), 같은 고객, 대기업 제외" 기준으로 다시 고릅니다. 오늘은 마미케어·뷰앤디·듀얼소닉입니다.</p></details>
+  <details><summary>스니핏 같은 유료 툴은요?</summary><p>오늘은 커넥터가 없어 연결하지 못했습니다. 메타 광고 라이브러리와 구글 광고 투명성 센터는 로그인 없이 열려서 무료로 먼저 검증했고, 부족한 부분(구글 광고 문구, 상세페이지 이미지 글자)이 보이면 유료 툴을 검토하겠습니다.</p></details>
+  <details><summary>45분은 어디서 나왔어요?</summary><p>추정입니다. 월요일에 손으로 직접 해 보면서 실제로 잽니다.</p></details>
+</section>
+
+<footer>
+  실제 조사: Meta 광고 라이브러리(대한민국), Google 광고 투명성 센터, mommy-care.co.kr, beaund.com, vanav.co.kr, kurly.com (2026-11-16 확인) · 근거 자료: 콘텐츠 마케팅 채용공고 구조화 데이터 91건(사람인 57, 잡코리아 34, 2026-11-16 수집) · 에이피알 공고 2건(신입·경력, 마감 2026-11-22) · 시장 인사이트·JD 패턴 문서. 비율은 본문 낱말 기준 집계라 오차가 있습니다.<br>
+  <span class="tag as" style="margin:0">가정</span> 아직 재지 않은 추정값 · <span class="tag mi" style="margin:0">못 찾을 수 있음</span> 공개 웹에서 찾기 어려운 칸 · 작성: 메디큐브 콘텐츠마케팅 신입 (수업 과제용 가상 상황)
+</footer>
+</div>
+</body>
+</html>
